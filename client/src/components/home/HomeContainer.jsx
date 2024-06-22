@@ -2,7 +2,7 @@ import React from "react";
 import ArrivalContainer from "./ArrivalContainer";
 import BookReservationHome from "./BookReservationHome";
 import FleetHome from "./FleetHome";
-import CarServiceHome from "./CarServiceHome";
+import CarService from "../common/CarService";
 
 const HomeContainer = () => {
   return (
@@ -10,7 +10,7 @@ const HomeContainer = () => {
       <ArrivalContainer />
       <BookReservationHome />
       <FleetHome />
-      <CarServiceHome />
+      <CarService />
     </div>
   );
 };

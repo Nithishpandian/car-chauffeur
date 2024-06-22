@@ -1,7 +1,7 @@
 import React from "react";
 import carServiceIcon from "../../assets/icons/service-icon.png";
 
-const CarServiceHome = () => {
+const CarService = () => {
   return (
     <div className="font-medium flex flex-col justify-center items-center gap-8 bg-[#1C1C1C] py-8 px-4 mt-2">
       <img src={carServiceIcon} className=" -mt-14 w-14" alt="" />
@@ -42,4 +42,4 @@ const CarServiceHome = () => {
   );
 };
 
-export default CarServiceHome;
+export default CarService;
