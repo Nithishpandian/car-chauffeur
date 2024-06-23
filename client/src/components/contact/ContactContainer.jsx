@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import bookNowIcon from "../../assets/icons/book-now-icon.png";
+import contactIcon from "../../assets/icons/contact-icon.png";
 import iconBg from "../../assets/icons/icon-bg.png";
 import { FaChevronDown } from "react-icons/fa";
 
-const BookNowForm = () => {
+const ContactContainer = () => {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -11,9 +11,6 @@ const BookNowForm = () => {
     email: "",
     category: "",
     message: "",
-    pickupLocation: "",
-    dropOffLocation: "",
-    vehicle: "Mercendes Benz s550",
   });
 
   const handleChange = (e) => {
@@ -26,21 +23,19 @@ const BookNowForm = () => {
   };
 
   return (
-    <div className="font-medium text-white flex flex-col justify-center items-center gap-4 bg-[#1C1C1C] py-8 px-4 mt-2">
+    <div className="font-medium text-white mt-14 mb-20 flex flex-col justify-center items-center gap-4 bg-[#1C1C1C] py-8 px-4 ">
       <div className="relative -mt-14 w-14">
         <img src={iconBg} className="" alt="" />
         <img
-          src={bookNowIcon}
+          src={contactIcon}
           className="w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           alt=""
         />
       </div>
       <div className=" flex flex-col gap-3">
         <div className=" flex flex-col justify-center items-center gap-1 ">
-          <h1 className=" text-3xl">Book Now</h1>
-          <p className=" text-opacity-50 text-white">
-            Global reservation center
-          </p>
+          <h1 className=" text-3xl">Contact Us</h1>
+          <p className=" text-opacity-50 text-white">Official Contact Form</p>
           <div className=" bg-[#D9D9D9] h-0.5 w-28 rounded my-1.5"></div>
           <p className=" text-opacity-50 text-white">(888) 826-3431</p>
           <p className=" text-opacity-50 text-white">
@@ -121,95 +116,6 @@ const BookNowForm = () => {
             rows={3}
             required
           ></textarea>
-          <div className="relative w-full text-black">
-            <select
-              className="block w-full appearance-none bg-white px-4 py-4 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
-              name="pickupLocation"
-              onChange={handleChange}
-              required
-            >
-              <option
-                value={""}
-                disabled
-                selected
-                className="bg-[#262626] text-white"
-              >
-                Pickup location
-              </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
-                Option 1
-              </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
-                Option 2
-              </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
-                Option 3
-              </option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-700">
-              <FaChevronDown />
-            </div>
-          </div>
-          <div className="relative w-full text-black">
-            <select
-              className="block w-full appearance-none bg-white px-4 py-4 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
-              name="dropOffLocation"
-              onChange={handleChange}
-              required
-            >
-              <option
-                value={""}
-                disabled
-                selected
-                className="bg-[#262626] text-white"
-              >
-                Drop-off location
-              </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
-                Option 1
-              </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
-                Option 2
-              </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
-                Option 3
-              </option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-700">
-              <FaChevronDown />
-            </div>
-          </div>
-          <h1 className="w-full text-left font-medium text-white">
-            Pick 1 from our available vehicles
-          </h1>
-          <div className=" grid grid-cols-2 gap-3 items-center justify-center w-full">
-            <button
-              type="button"
-              className={` ${
-                formData.vehicle === "Cadillac Escalade"
-                  ? " border-white bg-[#AA8B65] "
-                  : " border-[#54493C] bg-[#54493C] "
-              } border text-white py-[10px] px-4 w-full rounded`}
-              onClick={() =>
-                setFormData({ ...formData, vehicle: "Cadillac Escalade" })
-              }
-            >
-              Cadillac Escalade
-            </button>
-            <button
-              type="button"
-              className={` ${
-                formData.vehicle === "Mercendes Benz s550"
-                  ? " border-white bg-[#AA8B65] "
-                  : " border-[#54493C] bg-[#54493C] "
-              } border text-white py-[10px] px-4 w-full rounded`}
-              onClick={() =>
-                setFormData({ ...formData, vehicle: "Mercendes Benz s550" })
-              }
-            >
-              Mercendes Benz s550
-            </button>
-          </div>
           <button className=" w-full border border-[#AA8B65] text-white bg-[#AA8B65] py-3 px-4 text-center rounded">
             Submit
           </button>
@@ -219,4 +125,4 @@ const BookNowForm = () => {
   );
 };
 
-export default BookNowForm;
+export default ContactContainer;
