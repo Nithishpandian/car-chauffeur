@@ -3,7 +3,7 @@ import carServiceIcon from "../../assets/icons/service-icon.png";
 
 const CarService = () => {
   return (
-    <div className="font-medium flex flex-col justify-center items-center gap-8 bg-[#1C1C1C] py-8 px-4 mt-2">
+    <div className="font-medium flex flex-col justify-center items-center gap-8 bg-[#1C1C1C] py-8 px-4 mt-2 mb-14">
       <img src={carServiceIcon} className=" -mt-14 w-14" alt="" />
       <h1 className=" font-semibold text-6xl">Car Services</h1>
       <div className=" flex flex-col gap-4 items-center justify-center text-center font-medium text-[17px] leading-6 max-w-[1200px] ">

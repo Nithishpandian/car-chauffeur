@@ -13,13 +13,13 @@ const FleetHome = () => {
         <img src={carImg} className=" w-[80%]" alt="" />
       </div>
       <div className=" grid grid-cols-3 items-center gap-3 w-full max-w-[730px]">
-        <button className=" text-white bg-[#54493C] py-[10px] px-4 w-full rounded">
+        <button className=" border border-[#54493C] text-white bg-[#54493C] py-[10px] px-4 w-full rounded">
           Cadillac Escalade
         </button>
         <button className=" border border-white text-white bg-[#AA8B65] py-[10px] px-4 w-full rounded">
           Mercendes Benz s550
         </button>
-        <button className=" text-white bg-[#54493C] py-[10px] px-4 w-full rounded">
+        <button className=" border border-[#54493C] text-white bg-[#54493C] py-[10px] px-4 w-full rounded">
           Cadillac Escalade
         </button>
       </div>
