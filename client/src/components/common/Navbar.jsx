@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className=" text-white font-medium py-6 pl-16 pr-12 flex justify-between items-center gap-3">
+    <div
+      className={` text-white font-medium py-6 pl-16 pr-12 flex justify-between items-center gap-3`}
+    >
       <div className=" flex items-center gap-2">
         <img src={logo} alt="" />
         <h1 className=" text-3xl">NAME</h1>
@@ -17,8 +19,12 @@ const Navbar = () => {
         <Link to={"/contact"}>Contact</Link>
       </div>
       <div className=" flex justify-center items-center gap-4 text-lg ">
-        <Link to={"/login"} className="bg-[#AA8B65] py-2 px-6 rounded-md">Login</Link>
-        <Link to={"/register"} className="">Sign Up</Link>
+        <Link to={"/login"} className="bg-[#AA8B65] py-2 px-6 rounded-md">
+          Login
+        </Link>
+        <Link to={"/register"} className="">
+          Sign Up
+        </Link>
       </div>
     </div>
   );
