@@ -26,7 +26,7 @@ const BookNowForm = () => {
   };
 
   return (
-    <div className="font-medium text-white flex flex-col justify-center items-center gap-4 bg-[#1C1C1C] py-8 px-4 mt-2">
+    <div className="font-medium text-white flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-4 mt-2">
       <div className="relative -mt-14 w-14">
         <img src={iconBg} className="" alt="" />
         <img
@@ -41,7 +41,7 @@ const BookNowForm = () => {
           <p className=" text-opacity-50 text-white">
             Global reservation center
           </p>
-          <div className=" bg-[#D9D9D9] h-0.5 w-28 rounded my-1.5"></div>
+          <div className=" bg-lightishGray h-0.5 w-28 rounded my-1.5"></div>
           <p className=" text-opacity-50 text-white">(888) 826-3431</p>
           <p className=" text-opacity-50 text-white">
             specialservices@brandname.com
@@ -49,14 +49,14 @@ const BookNowForm = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className=" sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
+          className=" max-[410px]:min-w-[320px] min-[410px]:min-w-[390px] sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
         >
           <input
             type="text"
             name="name"
             onChange={handleChange}
             placeholder="Name"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -64,7 +64,7 @@ const BookNowForm = () => {
             name="company"
             onChange={handleChange}
             placeholder="Company"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -72,7 +72,7 @@ const BookNowForm = () => {
             name="phone"
             onChange={handleChange}
             placeholder="Phone"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -80,7 +80,7 @@ const BookNowForm = () => {
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <div className="relative w-full text-black">
@@ -94,17 +94,17 @@ const BookNowForm = () => {
                 value={""}
                 disabled
                 selected
-                className="bg-[#262626] text-white"
+                className="bg-backgroundGray text-white"
               >
                 Please select category
               </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
+              <option value={"Option 1"} className="bg-backgroundGray text-white">
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
+              <option value={"Option 2"} className="bg-backgroundGray text-white">
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
+              <option value={"Option 3"} className="bg-backgroundGray text-white">
                 Option 3
               </option>
             </select>
@@ -117,7 +117,7 @@ const BookNowForm = () => {
             name="message"
             onChange={handleChange}
             placeholder="Type your message"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             rows={3}
             required
           ></textarea>
@@ -132,17 +132,17 @@ const BookNowForm = () => {
                 value={""}
                 disabled
                 selected
-                className="bg-[#262626] text-white"
+                className="bg-backgroundGray text-white"
               >
                 Pickup location
               </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
+              <option value={"Option 1"} className="bg-backgroundGray text-white">
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
+              <option value={"Option 2"} className="bg-backgroundGray text-white">
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
+              <option value={"Option 3"} className="bg-backgroundGray text-white">
                 Option 3
               </option>
             </select>
@@ -161,17 +161,17 @@ const BookNowForm = () => {
                 value={""}
                 disabled
                 selected
-                className="bg-[#262626] text-white"
+                className="bg-backgroundGray text-white"
               >
                 Drop-off location
               </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
+              <option value={"Option 1"} className="bg-backgroundGray text-white">
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
+              <option value={"Option 2"} className="bg-backgroundGray text-white">
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
+              <option value={"Option 3"} className="bg-backgroundGray text-white">
                 Option 3
               </option>
             </select>
@@ -182,14 +182,14 @@ const BookNowForm = () => {
           <h1 className="w-full text-left font-medium text-white">
             Pick 1 from our available vehicles
           </h1>
-          <div className=" grid grid-cols-2 gap-3 items-center justify-center w-full">
+          <div className=" text-sm sm:text-base grid grid-cols-2 gap-3 items-center justify-center w-full">
             <button
               type="button"
               className={` ${
                 formData.vehicle === "Cadillac Escalade"
-                  ? " border-white bg-[#AA8B65] "
-                  : " border-[#54493C] bg-[#54493C] "
-              } border text-white py-[10px] px-4 w-full rounded`}
+                  ? " border-white bg-lightCholocate "
+                  : " border-darkCholocate bg-darkCholocate "
+              } border text-white py-[10px] px-2 sm:px-4 w-full rounded`}
               onClick={() =>
                 setFormData({ ...formData, vehicle: "Cadillac Escalade" })
               }
@@ -200,9 +200,9 @@ const BookNowForm = () => {
               type="button"
               className={` ${
                 formData.vehicle === "Mercendes Benz s550"
-                  ? " border-white bg-[#AA8B65] "
-                  : " border-[#54493C] bg-[#54493C] "
-              } border text-white py-[10px] px-4 w-full rounded`}
+                  ? " border-white bg-lightCholocate "
+                  : " border-darkCholocate bg-darkCholocate "
+              } border text-white py-[10px] px-2 sm:px-4 w-full rounded`}
               onClick={() =>
                 setFormData({ ...formData, vehicle: "Mercendes Benz s550" })
               }
@@ -210,7 +210,7 @@ const BookNowForm = () => {
               Mercendes Benz s550
             </button>
           </div>
-          <button className=" w-full border border-[#AA8B65] text-white bg-[#AA8B65] py-3 px-4 text-center rounded">
+          <button className=" w-full border border-lightCholocate text-white bg-lightCholocate py-3 px-4 text-center rounded">
             Submit
           </button>
         </form>

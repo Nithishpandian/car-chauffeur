@@ -16,10 +16,10 @@ const SignupComponent = () => {
     console.log(formData);
   };
   return (
-    <div className="bg-[#1C1C1C] min-h-screen flex justify-center items-center ">
+    <div className="bg-backgroundSlate min-h-screen flex justify-center items-center ">
       <form
         onSubmit={handleSubmit}
-        className=" text-white flex flex-col gap-3 items-center justify-center sm:min-w-[450px] -mt-16"
+        className=" text-white flex flex-col gap-3 items-center justify-center max-[410px]:min-w-[340px] min-[410px]:min-w-[405px] sm:min-w-[450px] -mt-16"
       >
         <h1 className=" font-semibold text-4xl mb-3">Sign Up</h1>
         <input
@@ -27,7 +27,7 @@ const SignupComponent = () => {
           name="email"
           onChange={handleChange}
           placeholder="Email"
-          className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
           required
         />
         <input
@@ -35,7 +35,7 @@ const SignupComponent = () => {
           name="password"
           onChange={handleChange}
           placeholder="Password"
-          className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
           required
         />
         <input
@@ -43,10 +43,10 @@ const SignupComponent = () => {
           name="email2FA"
           onChange={handleChange}
           placeholder="Email 2FA"
-          className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
           required
         />
-        <button className=" w-full border border-[#AA8B65] font-semibold text-white bg-[#AA8B65] py-3 px-4 text-center rounded">
+        <button className=" w-full border border-lightCholocate font-semibold text-white bg-lightCholocate py-3 px-4 text-center rounded">
           Submit
         </button>
       </form>

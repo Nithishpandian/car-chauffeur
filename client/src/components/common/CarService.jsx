@@ -3,10 +3,12 @@ import carServiceIcon from "../../assets/icons/service-icon.png";
 
 const CarService = () => {
   return (
-    <div className="font-medium flex flex-col justify-center items-center gap-8 bg-[#1C1C1C] py-8 px-4 mt-2 mb-14">
+    <div className="font-medium flex flex-col justify-center items-center gap-8 bg-backgroundSlate py-8 px-4 mt-2 mb-14">
       <img src={carServiceIcon} className=" -mt-14 w-14" alt="" />
-      <h1 className=" font-semibold text-6xl">Car Services</h1>
-      <div className=" flex flex-col gap-4 items-center justify-center text-center font-medium text-[17px] leading-6 max-w-[1200px] ">
+      <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
+        Car Services
+      </h1>
+      <div className=" flex flex-col gap-2 sm:gap-3 md:gap-4 items-center justify-center text-center font-medium text-[13px] sm:text-[15px] md:text-[17px] md:leading-6 max-w-[1200px] ">
         <p>
           Accepting nothing less than stringent hospitality standards for our
           fleet and chauffeurs, EmpireCLS clients select us for our commitment

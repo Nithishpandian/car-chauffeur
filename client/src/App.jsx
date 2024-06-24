@@ -8,7 +8,7 @@ import Contact from "./pages/contact/Contact";
 
 function App() {
   return (
-    <div className=" font-Outfit bg-[#151515]">
+    <div className=" font-Outfit bg-backgroundBlack">
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="/register" element={<Signup />} />

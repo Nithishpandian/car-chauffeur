@@ -23,7 +23,7 @@ const ContactContainer = () => {
   };
 
   return (
-    <div className="font-medium text-white mt-14 mb-20 flex flex-col justify-center items-center gap-4 bg-[#1C1C1C] py-8 px-4 ">
+    <div className="font-medium text-white mt-14 mb-20 flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-4 w-full ">
       <div className="relative -mt-14 w-14">
         <img src={iconBg} className="" alt="" />
         <img
@@ -36,7 +36,7 @@ const ContactContainer = () => {
         <div className=" flex flex-col justify-center items-center gap-1 ">
           <h1 className=" text-3xl">Contact Us</h1>
           <p className=" text-opacity-50 text-white">Official Contact Form</p>
-          <div className=" bg-[#D9D9D9] h-0.5 w-28 rounded my-1.5"></div>
+          <div className=" bg-lightishGray h-0.5 w-28 rounded my-1.5"></div>
           <p className=" text-opacity-50 text-white">(888) 826-3431</p>
           <p className=" text-opacity-50 text-white">
             specialservices@brandname.com
@@ -44,14 +44,14 @@ const ContactContainer = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className=" sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
+          className=" w-full max-[410px]:min-w-[320px] min-[410px]:min-w-[390px] sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
         >
           <input
             type="text"
             name="name"
             onChange={handleChange}
             placeholder="Name"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -59,7 +59,7 @@ const ContactContainer = () => {
             name="company"
             onChange={handleChange}
             placeholder="Company"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -67,7 +67,7 @@ const ContactContainer = () => {
             name="phone"
             onChange={handleChange}
             placeholder="Phone"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -75,7 +75,7 @@ const ContactContainer = () => {
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <div className="relative w-full text-black">
@@ -89,17 +89,17 @@ const ContactContainer = () => {
                 value={""}
                 disabled
                 selected
-                className="bg-[#262626] text-white"
+                className="bg-backgroundGray text-white"
               >
                 Please select category
               </option>
-              <option value={"Option 1"} className="bg-[#262626] text-white">
+              <option value={"Option 1"} className="bg-backgroundGray text-white">
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-[#262626] text-white">
+              <option value={"Option 2"} className="bg-backgroundGray text-white">
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-[#262626] text-white">
+              <option value={"Option 3"} className="bg-backgroundGray text-white">
                 Option 3
               </option>
             </select>
@@ -112,11 +112,11 @@ const ContactContainer = () => {
             name="message"
             onChange={handleChange}
             placeholder="Type your message"
-            className=" bg-[#262626] p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             rows={3}
             required
           ></textarea>
-          <button className=" w-full border border-[#AA8B65] text-white bg-[#AA8B65] py-3 px-4 text-center rounded">
+          <button className=" w-full border border-lightCholocate text-white bg-lightCholocate py-3 px-4 text-center rounded">
             Submit
           </button>
         </form>
