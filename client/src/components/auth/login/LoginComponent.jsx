@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +15,32 @@ const LoginComponent = () => {
     e.preventDefault();
     console.log(formData);
   };
+
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <div className="bg-backgroundSlate min-h-screen flex justify-center items-center ">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className="bg-backgroundSlate min-h-screen flex justify-center items-center "
+    >
       <form
         onSubmit={handleSubmit}
         className=" text-white flex flex-col gap-3 items-center justify-center max-[410px]:min-w-[340px] min-[410px]:min-w-[405px] sm:min-w-[450px] -mt-16"
@@ -41,7 +66,7 @@ const LoginComponent = () => {
           Submit
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,9 +1,34 @@
 import React from "react";
 import reservationIcon from "../../assets/icons/reservation-icon.png";
+import { motion } from "framer-motion";
 
 const BookReservationHome = () => {
+  
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <div className="font-medium flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-3 mt-2">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className="font-medium flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-3 mt-2"
+    >
       <img src={reservationIcon} className=" -mt-14 w-14" alt="" />
       <div className=" flex flex-col justify-center items-center gap-4 max-w-[620px]">
         <h1 className=" text-2xl sm:text-3xl">Book a reservation</h1>
@@ -20,7 +45,7 @@ const BookReservationHome = () => {
           <p>Online personal account application for working</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

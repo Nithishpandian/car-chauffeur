@@ -1,9 +1,32 @@
 import React from "react";
 import globalIcon from "../../assets/icons/global-icon.png";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
   return (
-    <div className=" text-base md:text-lg bg-backgroundSlate text-white font-medium py-5 px-3 lg:px-7 xl:px-14 flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-2">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className=" text-base md:text-lg bg-backgroundSlate text-white font-medium py-5 px-3 lg:px-7 xl:px-14 flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-2"
+    >
       <div className="flex flex-col lg:flex-row lg:items-center gap-0.5 lg:gap-5">
         <h1>COMPANY LOGO</h1>
         <p className=" text-white text-opacity-50">
@@ -21,7 +44,7 @@ const Footer = () => {
           <h1>English</h1>
         </h1>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

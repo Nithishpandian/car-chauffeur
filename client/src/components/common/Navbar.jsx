@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className=" text-lg hidden md:flex items-center md:gap-3 lg:gap-5 justify-center">
           <Link to={"/"}>Home</Link>
           <Link to={"/about"}>About</Link>
-          <Link to={"/fleet"}>Fleet</Link>
+          <Link to={"/book-now"}>Fleet</Link>
           <Link to={"/services"}>Services</Link>
           <Link to={"/contact"}>Contact</Link>
         </div>
@@ -68,7 +68,7 @@ const Navbar = () => {
         <div className=" text-4xl font-semibold flex flex-col gap-6 md:hidden items-center justify-center -mt-14 pb-10 h-full">
           <Link to={"/"}>Home</Link>
           <Link to={"/about"}>About</Link>
-          <Link to={"/fleet"}>Fleet</Link>
+          <Link to={"/book-now"}>Fleet</Link>
           <Link to={"/services"}>Services</Link>
           <Link to={"/contact"}>Contact</Link>
           <div className=" md:hidden flex flex-col justify-center items-center gap-3 text-3xl font-semibold mt-10 ">

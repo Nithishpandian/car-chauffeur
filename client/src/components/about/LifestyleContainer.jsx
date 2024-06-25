@@ -2,10 +2,33 @@ import React from "react";
 import gpsIcon from "../../assets/icons/gps-icon.png";
 import wifiIcon from "../../assets/icons/wifi-icon.png";
 import cameraIcon from "../../assets/icons/camera-icon.png";
+import { motion } from "framer-motion";
 
 const LifestyleContainer = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
   return (
-    <div className=" flex flex-col items-center justify-center gap-4 pt-12 pb-16 px-4">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className=" flex flex-col items-center justify-center gap-4 pt-12 pb-16 px-4"
+    >
       <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
         The true lifestyle
       </h1>
@@ -34,7 +57,7 @@ const LifestyleContainer = () => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,8 +1,32 @@
 import React from "react";
 import carImg from "../../assets/images/car-home.png";
+import { motion } from "framer-motion";
+
 const FleetHome = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
   return (
-    <div className=" py-16 px-2 flex flex-col gap-14 items-center justify-center text-white">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className=" py-16 px-2 flex flex-col gap-14 items-center justify-center text-white"
+    >
       <div className=" flex flex-col items-center justify-center gap-2">
         <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
           Find Your Fleet
@@ -25,7 +49,7 @@ const FleetHome = () => {
           Cadillac Escalade
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

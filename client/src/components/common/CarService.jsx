@@ -1,9 +1,32 @@
 import React from "react";
 import carServiceIcon from "../../assets/icons/service-icon.png";
+import { motion } from "framer-motion";
 
 const CarService = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
   return (
-    <div className="font-medium flex flex-col justify-center items-center gap-8 bg-backgroundSlate py-8 px-4 mt-2 mb-14">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className="font-medium flex flex-col justify-center items-center gap-8 bg-backgroundSlate py-8 px-4 mt-2 mb-14"
+    >
       <img src={carServiceIcon} className=" -mt-14 w-14" alt="" />
       <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
         Car Services
@@ -40,7 +63,7 @@ const CarService = () => {
           transportation. Only the best become EmpireCLS chauffeurs.
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

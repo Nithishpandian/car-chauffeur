@@ -2,8 +2,24 @@ import React, { useState } from "react";
 import contactIcon from "../../assets/icons/contact-icon.png";
 import iconBg from "../../assets/icons/icon-bg.png";
 import { FaChevronDown } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ContactContainer = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -23,7 +39,15 @@ const ContactContainer = () => {
   };
 
   return (
-    <div className="font-medium text-white mt-14 mb-20 flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-4 w-full ">
+    <motion.div
+      variants={animationVariantFadeIn}
+      initial="initial"
+      whileInView={"animate"}
+      viewport={{
+        once: true,
+      }}
+      className="font-medium text-white mt-14 mb-20 flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-4 w-full "
+    >
       <div className="relative -mt-14 w-14">
         <img src={iconBg} className="" alt="" />
         <img
@@ -93,13 +117,22 @@ const ContactContainer = () => {
               >
                 Please select category
               </option>
-              <option value={"Option 1"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 1"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 2"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 3"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 3
               </option>
             </select>
@@ -121,7 +154,7 @@ const ContactContainer = () => {
           </button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

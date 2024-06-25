@@ -3,21 +3,55 @@ import ApplicantsAbout from "./ApplicantsAbout";
 import bulletinImage from "../../assets/icons/bulletin-icon.png";
 import LifestyleContainer from "./LifestyleContainer";
 import CarService from "../common/CarService";
+import { motion } from "framer-motion";
 
 const AboutContainer = () => {
+  const animationVariantFadeIn = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+      },
+    },
+  };
   return (
     <div className=" text-white text-center">
-      <div className=" flex flex-col items-center justify-center gap-2 py-16 px-4">
+      <motion.div
+        variants={animationVariantFadeIn}
+        initial="initial"
+        whileInView={"animate"}
+        viewport={{
+          once: true,
+        }}
+      >
+        <div className=" flex flex-col items-center justify-center gap-2 py-16 px-4">
+          <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
+            About Us
+          </h1>
+          <p className=" text-sm sm:text-base md:text-lg text-center font-medium">
+            Chauffeured Hospitality
+          </p>
+        </div>
+        <ApplicantsAbout />
+      </motion.div>
+      <motion.div
+        variants={animationVariantFadeIn}
+        initial="initial"
+        whileInView={"animate"}
+        viewport={{
+          once: true,
+        }}
+        className=" flex flex-col items-center justify-center gap-3 sm:gap-4 pt-16 pb-12 px-4"
+      >
         <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">
-          About Us
+          Perfecting The Art
         </h1>
-        <p className=" text-sm sm:text-base md:text-lg text-center font-medium">
-          Chauffeured Hospitality
-        </p>
-      </div>
-      <ApplicantsAbout />
-      <div className=" flex flex-col items-center justify-center gap-3 sm:gap-4 pt-16 pb-12 px-4">
-        <h1 className=" font-semibold text-4xl sm:text-5xl md:text-6xl">Perfecting The Art</h1>
         <p className="text-sm sm:text-base md:text-lg font-medium text-opacity-50 text-white">
           The same hospitality training as five star hotels
         </p>
@@ -51,7 +85,7 @@ const AboutContainer = () => {
             <div>Safe and defensive driving training</div>
           </div>
         </div>
-      </div>
+      </motion.div>
       <LifestyleContainer />
       <CarService />
     </div>
