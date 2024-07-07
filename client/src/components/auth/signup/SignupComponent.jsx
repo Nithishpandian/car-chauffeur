@@ -55,6 +55,22 @@ const SignupComponent = () => {
       >
         <h1 className=" font-semibold text-4xl mb-3">Sign Up</h1>
         <input
+          type="text"
+          name="fullname"
+          onChange={handleChange}
+          placeholder="Full Name"
+          className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          required
+        />
+        <input
+          type="number"
+          name="phone"
+          onChange={handleChange}
+          placeholder="Phone Number"
+          className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          required
+        />
+        <input
           type="email"
           name="email"
           onChange={handleChange}

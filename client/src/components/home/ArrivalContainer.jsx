@@ -2,10 +2,10 @@ import React from "react";
 import motorImg from "../../assets/images/motor-arrival.png";
 import sustainabilityImg from "../../assets/images/sustainability-arrival.png";
 import meetingImg from "../../assets/images/meeting-arrival.png";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const ArrivalContainer = () => {
-
   const animationVariantFadeIn = {
     initial: {
       opacity: 0,
@@ -38,9 +38,12 @@ const ArrivalContainer = () => {
         Is much more than just a destination. It’s our signature
       </p>
       <div className=" text-sm sm:text-base font-medium grid grid-cols-2 items-center gap-1.5">
-        <button className=" text-white bg-lightCholocate py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded">
+        <Link
+          to={"/book-now"}
+          className=" text-white bg-lightCholocate py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded"
+        >
           Reserve a ride
-        </button>
+        </Link>
         <button className=" text-backgroundBlack bg-white py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded">
           I have a question
         </button>
