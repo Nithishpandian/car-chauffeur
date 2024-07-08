@@ -32,16 +32,12 @@ const AdminPanelTable = () => {
         } font-medium text-sm sm:text-base md:text-lg bg-backgroundGray rounded py-10 px-4 sm:px-5 md:px-7 lg:px-14 items-center justify-around gap-4 sm:gap-5 md:gap-9 lg:gap-10`}
       >
         <div>
-          <h1>Location: Washington, DC</h1>
-          <p className=" underline">Check it live</p>
+          <h1>Location: Cherry Hill, New Jersey</h1>
+          <p className=" underline cursor-pointer">Check it live</p>
         </div>
         <div>
-          <h1>Driver: Rodriguez Alsort</h1>
-          <p className=" underline">Check stats</p>
-        </div>
-        <div>
-          <h1>Ride estimated length</h1>
-          <p>0hr 46m 25s</p>
+          <h1>From Cherry Hill, New Jersey to</h1>
+          <p>Washington, DC</p>
         </div>
       </div>
     </div>

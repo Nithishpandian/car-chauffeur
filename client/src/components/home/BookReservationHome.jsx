@@ -34,9 +34,9 @@ const BookReservationHome = () => {
       <div className=" flex flex-col justify-center items-center gap-4 max-w-[620px]">
         <h1 className=" text-2xl sm:text-3xl">Book a reservation</h1>
         <div className=" grid grid-cols-2 items-center gap-1.5 sm:gap-3 w-full text-sm sm:text-base">
-          <button className=" text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
+          <Link to={"/book-now"} className=" text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
             Reserve a ride
-          </button>
+          </Link>
           <Link to={"/contact"} className=" text-center text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
             I have a question
           </Link>

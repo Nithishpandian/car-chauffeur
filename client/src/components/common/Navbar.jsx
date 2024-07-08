@@ -44,6 +44,7 @@ const Navbar = () => {
         <div className=" text-lg hidden md:flex items-center md:gap-3 lg:gap-5 justify-center">
           <Link to={"/"}>Home</Link>
           <Link to={"/about"}>About</Link>
+          <Link to={"/book-now"}>Book now</Link>
           <a href="#fleet">Fleet</a>
           <a href="#services">Services</a>
           <Link to={"/contact"}>Contact</Link>
@@ -93,6 +94,7 @@ const Navbar = () => {
         <div className=" text-4xl font-semibold flex flex-col gap-6 md:hidden items-center justify-center -mt-14 pb-10 h-full">
           <Link to={"/"}>Home</Link>
           <Link to={"/about"}>About</Link>
+          <Link to={"/book-now"}>Book now</Link>
           <a onClick={() => setOpenMenu(false)} href="#fleet">
             Fleet
           </a>

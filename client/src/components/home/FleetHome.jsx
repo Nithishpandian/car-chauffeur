@@ -1,5 +1,6 @@
-import React from "react";
-import carImg from "../../assets/images/car-home.png";
+import React, { useState } from "react";
+import chevrolet from "../../assets/images/chevrolet.png";
+import toyoto from "../../assets/images/toyoto.png";
 import { motion } from "framer-motion";
 
 const FleetHome = () => {
@@ -17,6 +18,9 @@ const FleetHome = () => {
       },
     },
   };
+
+  const [selectedCar, setSelectedCar] = useState("chevrolet");
+
   return (
     <motion.div
       variants={animationVariantFadeIn}
@@ -37,17 +41,32 @@ const FleetHome = () => {
         </p>
       </div>
       <div className=" flex items-center justify-center">
-        <img src={carImg} className=" sm:w-[80%]" alt="" />
+        <img
+          src={selectedCar === "chevrolet" ? chevrolet : toyoto}
+          className=" sm:w-[80%]"
+          alt=""
+        />
       </div>
-      <div className=" text-sm min-[560px]:text-base grid grid-cols-1 min-[502px]:grid-cols-3 items-center gap-1.5 sm:gap-2 md:gap-3 w-full max-w-[730px] px-2 min-[502px]:px-0">
-        <button className=" border border-darkCholocate text-white bg-darkCholocate py-2 sm:py-[10px] px-2 sm:px-4 w-full rounded">
-          Cadillac Escalade
+      <div className=" text-sm min-[560px]:text-base grid grid-cols-1 min-[502px]:grid-cols-2 items-center gap-1.5 sm:gap-2 md:gap-3 w-full max-w-[730px] px-2 min-[502px]:px-0">
+        <button
+          onClick={() => setSelectedCar("chevrolet")}
+          className={` border ${
+            selectedCar === "chevrolet"
+              ? "border-white bg-lightCholocate"
+              : " border-darkCholocate bg-darkCholocate"
+          } text-white py-2 sm:py-[10px] px-2 sm:px-4 w-full rounded`}
+        >
+          Chevrolet Suburban
         </button>
-        <button className=" border border-white text-white bg-lightCholocate py-2 sm:py-[10px] px-2 sm:px-4 w-full rounded">
-          Mercendes Benz s550
-        </button>
-        <button className=" border border-darkCholocate text-white bg-darkCholocate py-2 sm:py-[10px] px-2 sm:px-4 w-full rounded">
-          Cadillac Escalade
+        <button
+          onClick={() => setSelectedCar("toyoto")}
+          className={` border ${
+            selectedCar === "toyoto"
+              ? "border-white bg-lightCholocate"
+              : " border-darkCholocate bg-darkCholocate"
+          } text-white py-2 sm:py-[10px] px-2 sm:px-4 w-full rounded`}
+        >
+          Toyota Sienna
         </button>
       </div>
     </motion.div>

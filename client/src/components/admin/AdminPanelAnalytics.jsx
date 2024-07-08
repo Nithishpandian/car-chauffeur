@@ -7,10 +7,10 @@ const AdminPanelAnalytics = () => {
         <div className=" text-lg font-medium">Money in</div>
         <div className=" text-xl sm:text-2xl md:text-3xl font-semibold">$1,599.55</div>
       </div>
-      <div>
+      {/* <div>
         <div className=" text-lg font-medium">Money out</div>
         <div className=" text-xl sm:text-2xl md:text-3xl font-semibold">$341.30</div>
-      </div>
+      </div> */}
       <div>
         <div className=" text-sm sm:text-base md:text-lg font-medium">Active rides</div>
         <div className=" text-xl sm:text-2xl md:text-3xl font-semibold">4</div>
