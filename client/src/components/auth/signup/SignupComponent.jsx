@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupComponent = () => {
   const navigate = useNavigate();
@@ -93,6 +93,12 @@ const SignupComponent = () => {
           className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
           required
         />
+        <Link
+          to={"/terms-services"}
+          className=" my-2 text-sm w-full flex items-start justify-start"
+        >
+          By signing up you agree to our Terms and Services
+        </Link>
         <button className=" w-full border border-lightCholocate font-semibold text-white bg-lightCholocate py-3 px-4 text-center rounded">
           Submit
         </button>

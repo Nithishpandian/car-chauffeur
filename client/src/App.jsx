@@ -11,6 +11,7 @@ import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import ProtectedRouteAdmin from "./pages/auth/ProtectedRouteAdmin";
 import { useEffect, useState } from "react";
 import api from "./utils/api";
+import TermsServices from "./pages/terms-services/TermsServices";
 
 function App() {
   const [user, setUser] = useState();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/terms-services" element={<TermsServices />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/book-now" element={<BookNow />} />
         </Route>
