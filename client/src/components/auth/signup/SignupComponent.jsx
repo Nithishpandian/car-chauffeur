@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const SignupComponent = () => {
+  const navigate = useNavigate();
   const animationVariantFadeIn = {
     initial: {
       opacity: 0,
@@ -21,6 +24,8 @@ const SignupComponent = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    fullname: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -33,9 +38,11 @@ const SignupComponent = () => {
       .post("http://localhost:4000/api/user/register", formData)
       .then((res) => {
         console.log(res);
+        toast.success("Registered succesfully");
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.response.data.message);
       });
   };
 

@@ -11,6 +11,18 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    fullname: {
+      type: String,
+      required: true,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiMenu3Fill } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
   const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
+    setToken(localStorage.getItem("token"));
+
     if (openMenu) {
       document.body.style.overflow = "hidden";
     } else {
@@ -18,6 +23,14 @@ const Navbar = () => {
       document.body.style.overflow = "auto";
     };
   }, [openMenu]);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("adminToken");
+    setToken("");
+    navigate("/");
+  };
 
   return (
     <div>
@@ -36,15 +49,27 @@ const Navbar = () => {
           <Link to={"/contact"}>Contact</Link>
         </div>
         <div className=" hidden md:flex justify-center items-center gap-2 lg:gap-4 text-lg ">
-          <Link
-            to={"/login"}
-            className="bg-lightCholocate py-1 lg:py-2 px-3 lg:px-6 rounded-md"
-          >
-            Login
-          </Link>
-          <Link to={"/register"} className="">
-            Sign Up
-          </Link>
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className=" border border-lightCholocate bg-transparent text-lightCholocate py-1 px-6 rounded"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              {" "}
+              <Link
+                to={"/login"}
+                className="bg-lightCholocate py-1 lg:py-2 px-3 lg:px-6 rounded-md"
+              >
+                Login
+              </Link>
+              <Link to={"/register"} className="">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
         <div className=" flex md:hidden">
           {openMenu ? (
@@ -71,14 +96,26 @@ const Navbar = () => {
           <Link to={"/book-now"}>Fleet</Link>
           <Link to={"/services"}>Services</Link>
           <Link to={"/contact"}>Contact</Link>
-          <div className=" md:hidden flex flex-col justify-center items-center gap-3 text-3xl font-semibold mt-10 ">
-            <Link to={"/login"} className="bg-lightCholocate py-1 px-6 rounded">
-              Login
-            </Link>
-            <Link to={"/register"} className="">
-              Sign Up
-            </Link>
-          </div>
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className=" border border-lightCholocate bg-transparent text-lightCholocate py-1 px-6 rounded"
+            >
+              Logout
+            </button>
+          ) : (
+            <div className=" md:hidden flex flex-col justify-center items-center gap-3 text-3xl font-semibold mt-10 ">
+              <Link
+                to={"/login"}
+                className="bg-lightCholocate py-1 px-6 rounded"
+              >
+                Login
+              </Link>
+              <Link to={"/register"} className="">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

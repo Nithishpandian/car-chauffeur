@@ -3,6 +3,8 @@ import contactIcon from "../../assets/icons/contact-icon.png";
 import iconBg from "../../assets/icons/icon-bg.png";
 import { FaChevronDown } from "react-icons/fa";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ContactContainer = () => {
   const animationVariantFadeIn = {
@@ -35,7 +37,25 @@ const ContactContainer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    axios
+      .post("http://localhost:4000/api/contact/send-mail", formData)
+      .then((res) => {
+        console.log(res);
+        if (res.data.success) {
+          toast.success(res.data.message);
+          setFormData({
+            name: "",
+            company: "",
+            phone: "",
+            email: "",
+            category: "",
+            message: "",
+          });
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (

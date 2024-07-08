@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,7 +17,20 @@ const LoginComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    axios
+      .post("http://localhost:4000/api/user/login", formData)
+      .then((res) => {
+        console.log(res);
+        toast.success("Login succesful");
+        if (res.data.admin === true) {
+          sessionStorage.setItem("adminToken", res.data.token);
+        }
+        localStorage.setItem("token", res.data.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const animationVariantFadeIn = {

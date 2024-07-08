@@ -6,19 +6,19 @@ const User = require("../models/userModel");
 // @desc    Register new user
 // @route   POST /api/user/register
 // @access  Public
-const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+const registerUser = asyncHandler(async (req, res, next) => {
+  const { email, password, phone, fullname } = req.body;
 
-  if (!email || !password) {
+  if (!email || !password || !phone || !fullname) {
     res.status(400);
-    throw new Error("Please add all the fields");
+    return next(new Error("Please add all the fields"));
   }
 
   // Check if user already exists
   const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
-    throw new Error("User already exists");
+    return next(new Error("User already exists"));
   }
 
   // Hash password
@@ -29,6 +29,8 @@ const registerUser = async (req, res) => {
   const user = await User.create({
     email,
     password: hashedPassword,
+    fullname,
+    phone,
   });
 
   if (user) {
@@ -36,17 +38,20 @@ const registerUser = async (req, res) => {
       _id: user.id,
       email: user.email,
       token: generateToken(user._id),
+      fullname: user.fullname,
+      phone: user.phone,
+      admin: user.admin,
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    return next(new Error("Invalid user data"));
   }
-};
+});
 
 // @desc    Login user
 // @route   POST /api/user/login
 // @access  Public
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   // Check for user email
@@ -57,33 +62,38 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       email: user.email,
       token: generateToken(user._id),
+      fullname: user.fullname,
+      phone: user.phone,
+      admin: user.admin,
     });
   } else {
     res.status(400);
-    throw new Error("Invalid credentials");
+    return next(new Error("Invalid credentials"));
   }
 });
 
 // @desc    Get all users data
 // @route   GET /api/user/data
 // @access  Private
-const usersData = asyncHandler(async (req, res) => {
+const usersData = asyncHandler(async (req, res, next) => {
   const users = await User.find().select("_id email");
 
   res.status(200).json(users);
 });
 
 // @desc    Get user data
-// @route   GET /api/user/:id
+// @route   GET /api/user/me
 // @access  Private
-const getUserDetails = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select("_id email");
+const getUserDetails = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select(
+    "_id email fullname phone admin"
+  );
 
   if (user) {
     res.status(200).json(user);
   } else {
     res.status(404);
-    throw new Error("User not found");
+    return next(new Error("User not found"));
   }
 });
 

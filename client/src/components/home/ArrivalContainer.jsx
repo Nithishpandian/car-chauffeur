@@ -40,11 +40,11 @@ const ArrivalContainer = () => {
       <div className=" text-sm sm:text-base font-medium grid grid-cols-2 items-center gap-1.5">
         <Link
           to={"/book-now"}
-          className=" text-white bg-lightCholocate py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded"
+          className=" text-center text-white bg-lightCholocate py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded"
         >
           Reserve a ride
         </Link>
-        <button className=" text-backgroundBlack bg-white py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded">
+        <button className=" text-center text-backgroundBlack bg-white py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded">
           I have a question
         </button>
       </div>

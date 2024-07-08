@@ -1,16 +1,20 @@
-const express = require("express")
-const app = express()
-const cors = require("cors")
-const colors = require("colors")
-require("dotenv").config()
-const connectDB = require("./config/db")
-const port = process.env.PORT||4000
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const errorHandler = require("./middlewares/errorHandler");
+const colors = require("colors");
+require("dotenv").config();
+const connectDB = require("./config/db");
+const port = process.env.PORT || 4000;
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
-connectDB()
+connectDB();
 
-app.use("/api/user", require("./routes/userRoutes"))
+app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/contact", require("./routes/contactRoutes"))
 
-app.listen(port, ()=>console.log(`Server is running in port ${port}`))
+app.use(errorHandler);
+
+app.listen(port, () => console.log(`Server is running in port ${port}`));
