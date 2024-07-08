@@ -98,13 +98,22 @@ const BookNowForm = () => {
               >
                 Please select category
               </option>
-              <option value={"Option 1"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 1"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 1
               </option>
-              <option value={"Option 2"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 2"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 2
               </option>
-              <option value={"Option 3"} className="bg-backgroundGray text-white">
+              <option
+                value={"Option 3"}
+                className="bg-backgroundGray text-white"
+              >
                 Option 3
               </option>
             </select>
@@ -121,7 +130,23 @@ const BookNowForm = () => {
             rows={3}
             required
           ></textarea>
-          <div className="relative w-full text-black">
+          <input
+            type="text"
+            name="pickupLocation"
+            onChange={handleChange}
+            placeholder="Pick up location"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="dropOffLocation"
+            onChange={handleChange}
+            placeholder="Drop off location"
+            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            required
+          />
+          {/* <div className="relative w-full text-black">
             <select
               className="block w-full appearance-none bg-white px-4 py-4 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
               name="pickupLocation"
@@ -178,7 +203,7 @@ const BookNowForm = () => {
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-700">
               <FaChevronDown />
             </div>
-          </div>
+          </div> */}
           <h1 className="w-full text-left font-medium text-white">
             Pick 1 from our available vehicles
           </h1>

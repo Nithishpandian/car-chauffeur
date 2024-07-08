@@ -25,6 +25,7 @@ const CarService = () => {
       viewport={{
         once: true,
       }}
+      id="services"
       className="font-medium flex flex-col justify-center items-center gap-8 bg-backgroundSlate py-8 px-4 mt-2 mb-14"
     >
       <img src={carServiceIcon} className=" -mt-14 w-14" alt="" />

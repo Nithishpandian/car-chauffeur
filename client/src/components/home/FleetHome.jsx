@@ -25,6 +25,7 @@ const FleetHome = () => {
       viewport={{
         once: true,
       }}
+      id="fleet"
       className=" py-16 px-2 flex flex-col gap-14 items-center justify-center text-white"
     >
       <div className=" flex flex-col items-center justify-center gap-2">

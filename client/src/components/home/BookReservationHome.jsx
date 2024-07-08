@@ -1,6 +1,7 @@
 import React from "react";
 import reservationIcon from "../../assets/icons/reservation-icon.png";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const BookReservationHome = () => {
   
@@ -36,9 +37,9 @@ const BookReservationHome = () => {
           <button className=" text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
             Reserve a ride
           </button>
-          <button className=" text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
+          <Link to={"/contact"} className=" text-center text-white bg-backgroundLightSlate py-2 sm:py-[10px] px-3 w-full rounded">
             I have a question
-          </button>
+          </Link>
         </div>
         <div className=" text-[13px] sm:text-base md:text-lg grid grid-cols-2 sm:items-center justify-center gap-5 text-center w-full ">
           <p>Quick Book a reservation as a guest without creating an account</p>

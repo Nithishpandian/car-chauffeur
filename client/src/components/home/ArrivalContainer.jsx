@@ -44,9 +44,12 @@ const ArrivalContainer = () => {
         >
           Reserve a ride
         </Link>
-        <button className=" text-center text-backgroundBlack bg-white py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded">
+        <Link
+          to={"/contact"}
+          className=" text-center text-backgroundBlack bg-white py-2 sm:py-[10px] px-5 sm:px-12 w-full rounded"
+        >
           I have a question
-        </button>
+        </Link>
       </div>
       <div className="relative w-fit h-fit text-lg sm:text-xl">
         <img src={motorImg} alt="" />
