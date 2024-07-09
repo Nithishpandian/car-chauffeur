@@ -38,7 +38,7 @@ const ContactContainer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/api/contact/send-mail", formData)
+      .post(`${import.meta.env.VITE_BACKEND_BASE_URL}/contact/send-mail`, formData)
       .then((res) => {
         console.log(res);
         if (res.data.success) {

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import bookNowIcon from "../../assets/icons/book-now-icon.png";
 import iconBg from "../../assets/icons/icon-bg.png";
 import { FaChevronDown } from "react-icons/fa";
+import Autocomplete from "react-google-autocomplete";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const BookNowForm = () => {
   const [formData, setFormData] = useState({
@@ -13,50 +16,105 @@ const BookNowForm = () => {
     message: "",
     pickupLocation: "",
     dropOffLocation: "",
-    vehicle: "Mercendes Benz s550",
+    vehicle: "Toyota Sienna",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleChangePickup = (place) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      pickupLocation: place.formatted_address,
+    }));
+  };
+
+  const handleChangeDropoff = (place) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      dropOffLocation: place.formatted_address,
+    }));
+  };
+
+  const handlePayment = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const orderUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/payment/orders`;
+      const { data } = await axios.post(orderUrl, formData);
+      console.log(data);
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const initPayment = (data) => {
+    const options = {
+      key: import.meta.env.VITE_KEY_ID,
+      amount: data.amount,
+      currency: data.currency,
+      name: formData.name,
+      description: "Test Transaction",
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          const verifyUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/payment/verify`;
+          const payload = {
+            ...response,
+            formData,
+          };
+          const { data } = await axios.post(verifyUrl, payload);
+          console.log(data);
+          if (data.message === "Payment verified and data saved successfully") {
+            toast.success("Payment verified successfully");
+          } else if (data.message === "Invalid signature sent!") {
+            toast.error("Something went wrong. Try again!");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
   };
 
   return (
     <div className="font-medium text-white flex flex-col justify-center items-center gap-4 bg-backgroundSlate py-8 px-4 mt-2">
       <div className="relative -mt-14 w-14">
-        <img src={iconBg} className="" alt="" />
+        <img src={iconBg} alt="" />
         <img
           src={bookNowIcon}
           className="w-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           alt=""
         />
       </div>
-      <div className=" flex flex-col gap-3">
-        <div className=" flex flex-col justify-center items-center gap-1 ">
-          <h1 className=" text-3xl">Book Now</h1>
-          <p className=" text-opacity-50 text-white">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col justify-center items-center gap-1">
+          <h1 className="text-3xl">Book Now</h1>
+          <p className="text-opacity-50 text-white">
             Global reservation center
           </p>
-          <div className=" bg-lightishGray h-0.5 w-28 rounded my-1.5"></div>
-          <p className=" text-opacity-50 text-white">(888) 826-3431</p>
-          <p className=" text-opacity-50 text-white">
+          <div className="bg-lightishGray h-0.5 w-28 rounded my-1.5"></div>
+          <p className="text-opacity-50 text-white">(888) 826-3431</p>
+          <p className="text-opacity-50 text-white">
             specialservices@brandname.com
           </p>
         </div>
         <form
-          onSubmit={handleSubmit}
-          className=" max-[410px]:min-w-[320px] min-[410px]:min-w-[390px] sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
+          onSubmit={handlePayment}
+          className="max-[410px]:min-w-[320px] min-[410px]:min-w-[390px] sm:min-w-[450px] flex flex-col gap-3 justify-center items-center"
         >
           <input
             type="text"
             name="name"
             onChange={handleChange}
             placeholder="Name"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -64,7 +122,7 @@ const BookNowForm = () => {
             name="company"
             onChange={handleChange}
             placeholder="Company"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -72,7 +130,7 @@ const BookNowForm = () => {
             name="phone"
             onChange={handleChange}
             placeholder="Phone"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <input
@@ -80,7 +138,7 @@ const BookNowForm = () => {
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
           />
           <div className="relative w-full text-black">
@@ -91,29 +149,20 @@ const BookNowForm = () => {
               required
             >
               <option
-                value={""}
+                value=""
                 disabled
                 selected
                 className="bg-backgroundGray text-white"
               >
                 Please select category
               </option>
-              <option
-                value={"Option 1"}
-                className="bg-backgroundGray text-white"
-              >
+              <option value="Option 1" className="bg-backgroundGray text-white">
                 Option 1
               </option>
-              <option
-                value={"Option 2"}
-                className="bg-backgroundGray text-white"
-              >
+              <option value="Option 2" className="bg-backgroundGray text-white">
                 Option 2
               </option>
-              <option
-                value={"Option 3"}
-                className="bg-backgroundGray text-white"
-              >
+              <option value="Option 3" className="bg-backgroundGray text-white">
                 Option 3
               </option>
             </select>
@@ -126,116 +175,58 @@ const BookNowForm = () => {
             name="message"
             onChange={handleChange}
             placeholder="Type your message"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             rows={3}
             required
           ></textarea>
-          <input
-            type="text"
-            name="pickupLocation"
-            onChange={handleChange}
+          <Autocomplete
+            apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}
+            onPlaceSelected={handleChangePickup}
             placeholder="Pick up location"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
+            aria-label="Pick up location"
           />
-          <input
-            type="text"
-            name="dropOffLocation"
-            onChange={handleChange}
-            placeholder="Drop off location"
-            className=" bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
+          <Autocomplete
+            apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY}
+            onPlaceSelected={handleChangeDropoff}
+            placeholder="Drop-off location"
+            className="bg-backgroundGray p-4 placeholder:text-white text-white rounded w-full focus-within:outline-none"
             required
+            aria-label="Drop-off location"
           />
-          {/* <div className="relative w-full text-black">
-            <select
-              className="block w-full appearance-none bg-white px-4 py-4 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
-              name="pickupLocation"
-              onChange={handleChange}
-              required
-            >
-              <option
-                value={""}
-                disabled
-                selected
-                className="bg-backgroundGray text-white"
-              >
-                Pickup location
-              </option>
-              <option value={"Option 1"} className="bg-backgroundGray text-white">
-                Option 1
-              </option>
-              <option value={"Option 2"} className="bg-backgroundGray text-white">
-                Option 2
-              </option>
-              <option value={"Option 3"} className="bg-backgroundGray text-white">
-                Option 3
-              </option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-700">
-              <FaChevronDown />
-            </div>
-          </div>
-          <div className="relative w-full text-black">
-            <select
-              className="block w-full appearance-none bg-white px-4 py-4 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
-              name="dropOffLocation"
-              onChange={handleChange}
-              required
-            >
-              <option
-                value={""}
-                disabled
-                selected
-                className="bg-backgroundGray text-white"
-              >
-                Drop-off location
-              </option>
-              <option value={"Option 1"} className="bg-backgroundGray text-white">
-                Option 1
-              </option>
-              <option value={"Option 2"} className="bg-backgroundGray text-white">
-                Option 2
-              </option>
-              <option value={"Option 3"} className="bg-backgroundGray text-white">
-                Option 3
-              </option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-700">
-              <FaChevronDown />
-            </div>
-          </div> */}
           <h1 className="w-full text-left font-medium text-white">
             Pick 1 from our available vehicles
           </h1>
-          <div className=" text-sm sm:text-base grid grid-cols-2 gap-3 items-center justify-center w-full">
+          <div className="text-sm sm:text-base grid grid-cols-2 gap-3 items-center justify-center w-full">
             <button
               type="button"
-              className={` ${
-                formData.vehicle === "Cadillac Escalade"
-                  ? " border-white bg-lightCholocate "
-                  : " border-darkCholocate bg-darkCholocate "
+              className={`${
+                formData.vehicle === "Chevrolet Suburban"
+                  ? "border-white bg-lightCholocate"
+                  : "border-darkCholocate bg-darkCholocate"
               } border text-white py-[10px] px-2 sm:px-4 w-full rounded`}
               onClick={() =>
-                setFormData({ ...formData, vehicle: "Cadillac Escalade" })
+                setFormData({ ...formData, vehicle: "Chevrolet Suburban" })
               }
             >
-              Cadillac Escalade
+              Chevrolet Suburban
             </button>
             <button
               type="button"
-              className={` ${
-                formData.vehicle === "Mercendes Benz s550"
-                  ? " border-white bg-lightCholocate "
-                  : " border-darkCholocate bg-darkCholocate "
+              className={`${
+                formData.vehicle === "Toyota Sienna"
+                  ? "border-white bg-lightCholocate"
+                  : "border-darkCholocate bg-darkCholocate"
               } border text-white py-[10px] px-2 sm:px-4 w-full rounded`}
               onClick={() =>
-                setFormData({ ...formData, vehicle: "Mercendes Benz s550" })
+                setFormData({ ...formData, vehicle: "Toyota Sienna" })
               }
             >
-              Mercendes Benz s550
+              Toyota Sienna
             </button>
           </div>
-          <button className=" w-full border border-lightCholocate text-white bg-lightCholocate py-3 px-4 text-center rounded">
+          <button className="w-full border border-lightCholocate text-white bg-lightCholocate py-3 px-4 text-center rounded">
             Submit
           </button>
         </form>

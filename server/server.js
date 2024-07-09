@@ -14,6 +14,8 @@ connectDB();
 
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/contact", require("./routes/contactRoutes"))
+app.use("/api/payment", require("./routes/paymentRoutes"));
+app.use("/api/booking", require("./routes/bookingRoutes"))
 
 app.use(errorHandler);
 

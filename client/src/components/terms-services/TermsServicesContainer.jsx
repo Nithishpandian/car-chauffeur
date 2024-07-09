@@ -1,8 +1,17 @@
 import React from "react";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const TermsServicesContainer = () => {
+  const navigate = useNavigate();
   return (
     <div className=" py-20 pl-20 pr-32 font-medium text-white text-lg flex flex-col gap-4 ">
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-7 left-7 flex items-center gap-2"
+      >
+        <IoArrowBack className=" -mb-0.5" /> <span>Back</span>
+      </button>
       <h1 className=" text-3xl font-bold"> 1. Introduction</h1>
       <p>
         Welcome to [Your Company Name] (“Company”, “we”, “our”, “us”). These

@@ -3,6 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 const SignupComponent = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const SignupComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/api/user/register", formData)
+      .post(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/register`, formData)
       .then((res) => {
         console.log(res);
         toast.success("Registered succesfully");
@@ -54,11 +55,17 @@ const SignupComponent = () => {
       viewport={{
         once: true,
       }}
-      className="bg-backgroundSlate min-h-screen flex justify-center items-center "
+      className=" text-white bg-backgroundSlate min-h-screen flex justify-center items-center "
     >
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-7 left-7 flex items-center gap-2"
+      >
+        <IoArrowBack className=" -mb-0.5" /> <span>Back</span>
+      </button>
       <form
         onSubmit={handleSubmit}
-        className=" text-white flex flex-col gap-3 items-center justify-center max-[410px]:min-w-[340px] min-[410px]:min-w-[405px] sm:min-w-[450px] -mt-16"
+        className=" flex flex-col gap-3 items-center justify-center max-[410px]:min-w-[340px] min-[410px]:min-w-[405px] sm:min-w-[450px] -mt-16"
       >
         <h1 className=" font-semibold text-4xl mb-3">Sign Up</h1>
         <input
