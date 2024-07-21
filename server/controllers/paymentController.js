@@ -1,63 +1,80 @@
-const Razorpay = require("razorpay");
-const crypto = require("crypto");
-const Booking = require('../models/bookingModel'); 
+const asyncHandler = require("express-async-handler");
+const Stripe = require("stripe");
+const Booking = require("../models/bookingModel");
 
-const orderPayment = async (req, res) => {
+// @desc    create a checkout session
+// @route   POST /api/payment/checkout-session
+// @access  Private
+const getCheckoutSession = asyncHandler(async (req, res) => {
   try {
-    const instance = new Razorpay({
-      key_id: process.env.KEY_ID,
-      key_secret: process.env.KEY_SECRET,
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const {
+      name,
+      email,
+      vehicle,
+      pickupLocation,
+      dropOffLocation,
+      category,
+      message,
+      phone,
+      company,
+    } = req.body;
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      success_url: `${process.env.CLIENT_URL}`,
+      cancel_url: `${process.env.CLIENT_URL}`,
+      customer_email: email,
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            unit_amount: vehicle === "Toyota Sienna" ? 300 : 700, // Stripe expects the amount in cents
+            product_data: {
+              name,
+              metadata: {
+                vehicle,
+                pickupLocation,
+                dropOffLocation,
+                category,
+                message,
+                phone,
+                company,
+              },
+            },
+          },
+          quantity: 1,
+        },
+      ],
+      payment_intent_data: {
+        setup_future_usage: "off_session",
+      },
     });
 
-    const options = {
-      amount: req.body.vehicle === "Toyota Sienna" ? 3 * 100 : 7 * 100,
-      currency: "USD",
-      receipt: crypto.randomBytes(10).toString("hex"),
-    };
-
-    instance.orders.create(options, (error, order) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Something Went Wrong!" });
-      }
-      res.status(200).json({ data: order });
+    const booking = new Booking({
+      name,
+      email,
+      vehicle,
+      pickupLocation,
+      dropOffLocation,
+      category,
+      message,
+      phone,
+      company,
+      session: session.id,
+      paymentIntentId: session.payment_intent,
     });
+
+
+    await booking.save();
+
+    res.status(200).json({ success: true, session });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error!" });
-    console.log(error);
+    res.status(500).json({ message: "Payment failed", error });
   }
-};
-
-const verifyPayment = async (req, res) => {
-  try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-    const sign = razorpay_order_id + "|" + razorpay_payment_id;
-    const expectedSign = crypto
-      .createHmac("sha256", process.env.KEY_SECRET)
-      .update(sign.toString())
-      .digest("hex");
-
-    if (razorpay_signature === expectedSign) {
-      const bookingData = {
-        ...req.body.formData, // formData from the frontend
-        paymentId: razorpay_payment_id,
-        orderId: razorpay_order_id,
-      };
-
-      const booking = new Booking(bookingData);
-      await booking.save();
-
-      return res.status(200).json({ message: "Payment verified and data saved successfully" });
-    } else {
-      return res.status(400).json({ message: "Invalid signature sent!" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error!" });
-    console.log(error);
-  }
-};
+});
 
 module.exports = {
-  orderPayment,
-  verifyPayment,
+  getCheckoutSession,
 };

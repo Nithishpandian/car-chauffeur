@@ -11,8 +11,8 @@ const BookingSchema = new mongoose.Schema({
   dropOffLocation: String,
   vehicle: String,
   accept: String,
-  paymentId: String,
-  orderId: String,
+  session: String,
+  paymentIntentId: String, 
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);

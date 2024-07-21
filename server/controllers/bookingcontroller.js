@@ -1,11 +1,6 @@
-const Razorpay = require("razorpay");
 const asyncHandler = require("express-async-handler");
 const Booking = require("../models/bookingModel");
-
-const instance = new Razorpay({
-  key_id: process.env.KEY_ID,
-  key_secret: process.env.KEY_SECRET,
-});
+const Stripe = require("stripe");
 
 // @desc    Get all booking data
 // @route   GET /api/booking/all
@@ -23,26 +18,37 @@ const allBookingData = asyncHandler(async (req, res) => {
 // @route   PUT /api/booking/update/:id
 // @access  Private
 const updateBookingAccept = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { accept } = req.body;
+  const { accept, sessionId } = req.body;
 
   try {
-    const booking = await Booking.findById(id);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+    // Retrieve the booking to get the payment intent ID
+    const booking = await Booking.findOne({ session: sessionId });
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
 
     if (accept === "false") {
-      const amount = booking.vehicle === "Toyota Sienna" ? 300 : 700; // Amount in paise
       try {
-        const refund = await instance.payments.refund(booking.paymentId, { amount });
-        booking.accept = accept;
-        await booking.save();
-        return res.status(200).json({ message: "Refund processed successfully and booking updated", data: refund });
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+        if (!session) {
+          return res.status(404).json({ message: "Session not found" });
+        }
+
+        // Use the payment_intent from session to initiate refund
+        const refund = await stripe.refunds.create({
+          payment_intent: session.payment_intent,
+          amount: session.amount_total, // Refund the full amount for simplicity
+        });
+
+        res.status(200).json({ success: true, refund });
       } catch (error) {
         console.error("Refund error: ", error);
-        return res.status(500).json({ message: "Refund processing failed", error });
+        return res
+          .status(500)
+          .json({ message: "Refund processing failed", error });
       }
     }
 

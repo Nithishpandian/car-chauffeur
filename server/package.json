@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -23,6 +24,8 @@
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "razorpay": "^2.9.4",
-    "square": "^37.1.0"
+    "square": "^37.1.0",
+    "stripe": "^16.2.0",
+    "uuid": "^10.0.0"
   }
 }

@@ -40,47 +40,29 @@ const BookNowForm = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
     try {
-      const orderUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/payment/orders`;
-      const { data } = await axios.post(orderUrl, formData);
-      console.log(data);
-      initPayment(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      const orderUrl = `${
+        import.meta.env.VITE_BACKEND_BASE_URL
+      }/payment/checkout-session`;
 
-  const initPayment = (data) => {
-    const options = {
-      key: import.meta.env.VITE_KEY_ID,
-      amount: data.amount,
-      currency: data.currency,
-      name: formData.name,
-      description: "Test Transaction",
-      order_id: data.id,
-      handler: async (response) => {
-        try {
-          const verifyUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/payment/verify`;
-          const payload = {
-            ...response,
-            formData,
-          };
-          const { data } = await axios.post(verifyUrl, payload);
-          console.log(data);
-          if (data.message === "Payment verified and data saved successfully") {
-            toast.success("Payment verified successfully");
-          } else if (data.message === "Invalid signature sent!") {
-            toast.error("Something went wrong. Try again!");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
+      const res = await fetch(orderUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Payment failed. Please try again.");
+      }
+
+      if (data.session.url) {
+        window.location.href = data.session.url;
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
